@@ -1,0 +1,36 @@
+from bs4 import BeautifulSoup  # Import library BeautifulSoup untuk parsing HTML
+from selenium import webdriver  # Import library Selenium untuk mengotomatisasi browser
+from selenium.webdriver.support.ui import WebDriverWait  # Import WebDriverWait untuk eksplisit wait
+from selenium.webdriver.support import expected_conditions as EC  # Import expected_conditions untuk eksplisit wait
+from selenium.webdriver.common.by import By  # Import By untuk menentukan metode pencarian elemen
+import time  # Import library time untuk memberikan jeda waktu
+import pandas as pd  # Import library pandas untuk manipulasi data
+
+url = input("Masukkan url toko : ")  # Meminta pengguna untuk memasukkan URL toko
+
+if url :  # Memeriksa apakah URL telah dimasukkan
+    options = webdriver.ChromeOptions()  # Membuat opsi untuk Chrome
+    options.add_argument("--start-maximized")  # Mengatur Chrome untuk memulai dalam mode maksimal
+    driver = webdriver.Chrome(options=options)  # Inisialisasi driver Chrome dengan opsi yang telah ditentukan
+    driver.get(url)  # Mengunjungi URL yang dimasukkan
+
+    data = []  # Inisialisasi list untuk menyimpan data
+    for i in range(0, 31):  # Loop untuk menjelajahi 31 halaman
+        soup = BeautifulSoup(driver.page_source, "html.parser")  # Parsing halaman saat ini dengan BeautifulSoup
+        containers = soup.findAll('article', attrs = {'class':'css-72zbc4'})  # Mencari semua artikel dengan kelas 'css-72zbc4'
+
+        for container in containers:  # Loop melalui setiap container artikel
+            try:
+                review = container.find('span', attrs = {'data-testid':'lblItemUlasan'}).text  # Mencari ulasan dalam container
+                data.append(
+                    (review)  # Menambahkan ulasan ke list data
+                )
+            except AttributeError:
+                continue  # Melanjutkan jika ulasan tidak ditemukan
+
+        time.sleep(2)  # Memberikan jeda 2 detik
+        driver.find_element(By.CSS_SELECTOR, "button[aria-label^='Laman berikutnya']").click()  # Klik tombol 'Laman berikutnya'
+        time.sleep(3)  # Memberikan jeda 3 detik untuk memuat halaman berikutnya
+    print(data)  # Mencetak data ulasan yang terkumpul
+    df = pd.DataFrame(data, columns=["Ulasan"])  # Membuat DataFrame pandas dari data
+    df.to_csv("Aerostreet4.csv", index=False)  # Menyimpan DataFrame ke file CSV dengan nama 'Aerostreet4.csv'
