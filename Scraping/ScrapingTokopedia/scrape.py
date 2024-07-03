@@ -28,7 +28,7 @@ if url:
     # Panggil fungsi untuk klik "Selengkapnya" setelah membuka halaman
     klik_selengkapnya()
 
-    for i in range(0, 31):
+    for i in range(0, 70):
         soup = BeautifulSoup(driver.page_source, "html.parser")
         containers = soup.findAll('article', attrs={'class': 'css-72zbc4'})
 
@@ -52,6 +52,6 @@ if url:
 
     print(data)
     df = pd.DataFrame(data, columns=["Ulasan"])
-    df.to_csv("Aerostreet4.csv", index=False)
+    df.to_csv("Aerostreet3-2.csv", index=False)
 
     driver.quit()  # Menutup browser Selenium setelah selesai
