@@ -44,19 +44,11 @@ def predict(text):
     
     return predicted_label
 
-# Example usage
-# text = "Layanan sangat buruk"
-# predicted_label = predict(text)
-# print(f'The predicted label for the input text is: {predicted_label}')
-
-texts = [                                                                                                                                                                                                                                                                                                                                                                                  
-    'sesuai pesanan sepatu bagus pengiriman cepat',
-    'mintanya hitam kirim hitam putih yang kirim tali sepatu putih padahal sekolah anak tadi tali sepatu putih mengecewakan',
-    'pengiriman diluar estimasi',
-    'barang sudah unboxing'
-]
-
-for text in texts:
-    predicted_label = predict(text)
-    print(f'The predicted label for the input text "{text}" is: {predicted_label}')
-
+# Test the model
+while True:
+    user_input = input("Tanyakan sesuatu (atau ketik 'exit' untuk keluar): ")
+    if user_input.lower() == 'exit':
+        print("Terima kasih! Sampai jumpa!")
+        break
+    answer = predict(user_input)
+    print(f"Jawaban: {answer}")
