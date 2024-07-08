@@ -3,8 +3,8 @@ import pandas as pd
 import csv
 
 # Path untuk file lexicon positive dan negative
-positive_lexicon_file = 'lexicon_dictionary/positive.csv'
-negative_lexicon_file = 'lexicon_dictionary/negative.csv'
+positive_lexicon_file = 'preprocessing/lexicon_dictionary/positive.csv'
+negative_lexicon_file = 'preprocessing/lexicon_dictionary/negative.csv'
 
 # Membaca lexicon positive
 lexicon_positive = {}
@@ -21,7 +21,7 @@ with open(negative_lexicon_file, 'r', encoding='utf-8') as csvfile:
         lexicon_negative[row[0]] = int(row[1])
 
 # Membaca hasil preprocessing dari file CSV
-preprocessed_file = 'dataset/Aerostreet4_steming.csv'
+preprocessed_file = 'preprocessing/dataset/Aerostreet5_steming.csv'
 df = pd.read_csv(preprocessed_file)
 
 # Function untuk melakukan labeling berdasarkan lexicon
@@ -65,7 +65,7 @@ folder_name = 'label'
 if not os.path.exists(folder_name):
     os.makedirs(folder_name)
 
-output_file = os.path.join(folder_name, 'Aerostreet4_labeled.csv')
+output_file = os.path.join(folder_name, 'Aerostreet5_labeled.csv')
 df.to_csv(output_file, index=False, encoding='utf-8')
 
 print(f"Labeling selesai. Data yang telah dilabeli disimpan dalam file '{output_file}'.")
