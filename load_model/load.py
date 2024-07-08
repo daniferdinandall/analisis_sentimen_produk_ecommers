@@ -4,7 +4,7 @@ from safetensors.torch import load_file
 import pandas as pd
 import os
 
-versi_model = 3
+versi_model = 6
 
 model_dir = os.path.abspath('./results/v_' + str(versi_model))
 if not os.path.exists(model_dir):
