@@ -12,7 +12,7 @@ if url:
     options.add_argument("--start-maximized")
     driver = webdriver.Chrome(options=options)
     url = input("Masukkan url toko : ")
-    
+
     driver.get(url)
 
     data = []
