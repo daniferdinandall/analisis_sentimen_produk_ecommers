@@ -1,4 +1,4 @@
-# Tutorial Analisis Sentimen Ulasan Produk Ecommerce Menggunakan BERT Uncased
+# Tutorial Analisis Sentimen Ulasan Produk Ecommerce Menggunakan BERT
 
 ## Anggota Kelompok
 
